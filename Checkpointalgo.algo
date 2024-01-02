@@ -1,0 +1,106 @@
+                                 INSTRUCTION 1
+
+Program_ProduitDot;
+
+// Fonction qui calcule le produit scalaire (produit de points) de deux vecteurs v1 et v2
+
+function DotProduct(v1, v2: array of Real): Real;
+var
+  i: Integer;
+begin
+  Result := 0;
+  for i := 0 to Length(v1) - 1 do
+    Result := Result + v1[i] * v2[i];
+end;
+
+// Procédure qui détermine si deux vecteurs v1 et v2 sont orthogonaux en utilisant le produit de points
+
+procedure SontVecteursOrthogonaux(v1, v2: array of Real);
+var
+  ps: Real;
+begin
+  ps := DotProduct(v1, v2);
+  if ps = 0 then
+    writeln('Les vecteurs sont orthogonaux.')
+  else
+    writeln('Les vecteurs ne sont pas orthogonaux.');
+end;
+
+var
+  n, i: Integer;
+  v1, v2: array of Real;
+
+begin
+  
+  // Exemple pour n couples de vecteurs
+
+  write('Entrez le nombre de couples de vecteurs (n): ');
+  readln(n);
+
+  for i := 1 to n do
+  begin
+    write('Entrez les composantes du vecteur v1 (séparées par des espaces) : ');
+    SetLength(v1, n);
+    for i := 0 to Length(v1) - 1 do
+      read(v1[i]);
+
+    write('Entrez les composantes du vecteur v2 (séparées par des espaces) : ');
+    SetLength(v2, n);
+    for i := 0 to Length(v2) - 1 do
+      read(v2[i]);
+
+    SontVecteursOrthogonaux(v1, v2);
+  end;
+end.
+
+                                    INSTRUCTION 2
+
+Program_TriParInsertion; 
+
+// Procédure pour le tri par insertion
+procedure TriParInsertion(var arr: array of Integer);
+var
+  i, j, valeurAInserer: Integer;
+begin
+  for i := 1 to Length(arr) - 1 do
+  begin
+    valeurAInserer := arr[i];
+    j := i - 1;
+
+    // Déplacer les éléments plus grands que la valeur à insérer vers la droite
+    while (j >= 0) and (arr[j] > valeurAInserer) do
+    begin
+      arr[j + 1] := arr[j];
+      j := j - 1;
+    end;
+
+    // Insérer la valeur à sa position correcte
+    arr[j + 1] := valeurAInserer;
+  end;
+end;
+
+var
+  tableau: array of Integer;
+  i: Integer;
+
+begin
+  // Exemple d'utilisation du tri par insertion
+  writeln('Entrez la taille du tableau : ');
+  readln(i);
+
+  SetLength(tableau, i);
+
+  writeln('Entrez les éléments du tableau : ');
+  for i := 0 to Length(tableau) - 1 do
+    readln(tableau[i]);
+
+  // Appel de la procédure de tri par insertion
+  TriParInsertion(tableau);
+
+  // Affichage du tableau trié
+  writeln('Tableau trié : ');
+  for i := 0 to Length(tableau) - 1 do
+    write(tableau[i], ' ');
+
+  readln;
+end.
